@@ -13,11 +13,11 @@ const navbar = () => {
       <div>
         <ul className="flex justify-end items-center gap-10 p-6 mx-auto cursor-pointer ">
           {data.map((data, index) => (
-            <li className="text-lg font-medium text-[#e5e5e5] md:hover:text-[#fca311] hidden md:block">{data.title}</li>
+            <li className="text-lg font-medium text-[#e5e5e5] md:hover:text-[#fca311] hidden md:block hover:transition-all hover:duration-[0.2s]">{data.title}</li>
           ))}
         </ul>
       </div>
-      <button className="bg-[#fca311] p-3 md:px-6 rounded-full m-10 hover:bg-[#ee9b00] text-[#14213d] font-extrabold hidden md:block">Login</button>
+      <button className="border-2 md:p-3 md:px-6 rounded-full md:m-10 border-solid border-[#fca311] text-[#e5e5e5] font-extrabold md:block p-2 hover:bg-[#fca311] hover:text-[#14213d] hover:transition-all hover:duration-[0.3s]"><span className="text-sm md:text-base p-2">Login</span></button>
 
 
       {/* small screen menu */}
