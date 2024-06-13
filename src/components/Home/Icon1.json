@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "image": "avalanche.png"
+  },
+  {
+    "id": "2",
+    "image": "Bitcoin.png"
+  },
+  {
+    "id": "3",
+    "image": "coin.png"
+  },
+  {
+    "id": "4",
+    "image": "ethereum-classic.png"
+  },
+  {
+    "id": "5",
+    "image": "filecoin.png"
+  },
+  {
+    "id": "6",
+    "image": "injective.png"
+  },
+  {
+    "id": "7",
+    "image": "kaspa.png"
+  },
+  {
+    "id": "8",
+    "image": "monero.png"
+  },
+  {
+    "id": "9",
+    "image": "thorchain.png"
+  }
+]

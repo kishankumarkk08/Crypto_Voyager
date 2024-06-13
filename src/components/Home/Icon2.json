@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "image": "Ethereum.png"
+  },
+  {
+    "id": "2",
+    "image": "near-protocol.png"
+  },
+  {
+    "id": "3",
+    "image": "render.png"
+  },
+  {
+    "id": "4",
+    "image": "polygon.png"
+  },
+  {
+    "id": "5",
+    "image": "shiba-inu.png"
+  },
+  {
+    "id": "6",
+    "image": "tether.png"
+  },
+  {
+    "id": "7",
+    "image": "Tron.png"
+  },
+  {
+    "id": "8",
+    "image": "dogecoin.png"
+  },
+  {
+    "id": "9",
+    "image": "celestia.png"
+  }
+]
