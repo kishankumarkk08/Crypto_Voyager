@@ -10,7 +10,7 @@ function Home() {
       <div className="bg-black h-screen w-full sm:overflow-hidden mt-0 -z-10 absolute top-0 overscroll-y-auto">
         <div className="grid sm:grid-cols-12 w-full h-fit place-content-center outer gap-20 sm:gap-0 body overflow-hidden sm:mt-32 mt-28 ">
           <div className="sm:col-span-9 flex flex-col justify-start items-center">
-            <div className="sm:mt-16 mt-14">
+            <div className="sm:mt-36 mt-14 lg:mt-16">
               <TypeAnimation
                 sequence={[
 

@@ -10,16 +10,27 @@ const Dashboard = () => {
   const [event, setEvent] = useState("Grid")
 
 
+  // useEffect(() => {
+  //   axios
+  //     .get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=100&sparkline=false&precision=2')
+  //     .then((response) => {
+  //       console.log(response)
+  //       setData(response.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error)
+  //     })
+  // }, [])
+
   useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=100&sparkline=false&precision=2')
-      .then((response) => {
-        console.log(response)
+    ; (async () => {
+      try {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=100&sparkline=false&precision=2')
         setData(response.data)
-      })
-      .catch((error) => {
-        console.log("error", error)
-      })
+      } catch (error) {
+        console.log("Something went wrong")
+      }
+    })()
   }, [])
 
   const gridHandle = () => {
@@ -52,12 +63,12 @@ const Dashboard = () => {
           </div>
 
           <div>
-            {event !== 'List' ? <>
+            {event !== 'List' ? <div>
               <GridDisplay data={data} />
-            </> :
-              <>
+            </div> :
+              <div>
                 <ListDisplay />
-              </>}
+              </div>}
           </div>
 
         </div>

@@ -1,11 +1,12 @@
 import React from 'react'
+import GridCard from './GridCard';
 
 const GridDisplay = ({ data }) => {
   return (
     <>
-      <div>
-        {data.map((item, i) => {
-          return (<p key={i} className="text-white">{i + 1}.{item.name}</p>);
+      <div className="flex justify-center items-center flex-wrap gap-6 m-6 flex-col sm:flex-row">
+        {data.map((data, i) => {
+          return (<GridCard data={data} key={i} />);
         })}
       </div>
     </>
