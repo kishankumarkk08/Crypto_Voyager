@@ -1,6 +1,7 @@
 import React from 'react'
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
+import { Tooltip } from '@mui/material';
 
 const GridCard = ({ data }) => {
   return (
@@ -12,23 +13,31 @@ const GridCard = ({ data }) => {
           <p className="text-[#e5e5e5] font-thin text-sm">{data.name}</p>
         </div>
       </div>
-      {data.price_change_percentage_24h.toFixed(2) > 0 ?
+      {data.price_change_percentage_24h > 0 ?
         (<>
-          <div className="flex gap-5 mt-5 ml-8">
-            <div className="text-green-500 border-2 border-green-500 hover:bg-green-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-3 text-sm">{data.price_change_percentage_24h.toFixed(2)}%   </div>
-            <div className="text-green-500 border-2 border-green-500 hover:bg-green-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-3 text-sm"><TrendingUpRoundedIcon></TrendingUpRoundedIcon></div>
+          <div className="flex gap-5 mt-8 ml-8">
+            <Tooltip title="Price change percentage in 24h">
+              <div className="text-green-500 border-2 border-green-500 hover:bg-green-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-3xl text-sm h-fit pr-6 pl-6 pt-3 pb-3 font-semibold">+{data.price_change_percentage_24h?.toFixed(2)}%   </div>
+            </Tooltip>
+            <div className="text-green-500 border-2 border-green-500 hover:bg-green-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-2 text-sm h-fit"><TrendingUpRoundedIcon></TrendingUpRoundedIcon></div>
           </div>
-          <div className="text-green-500 font-semibold ml-8 mt-6"><span className="text-green-500 font-semibold">&#8377;</span>{data.current_price.toLocaleString('en-IN')}</div>
+          <Tooltip title="Current Price">
+            <div className="text-green-500 font-semibold ml-8 mt-6"><span className="text-green-500 font-semibold">&#8377;</span>{" "}{data.current_price.toLocaleString('en-IN')}</div>
+          </Tooltip>
         </>
         )
 
         :
         (<>
-          <div className="flex gap-5 mt-5 ml-8">
-            <div className="text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-3 text-sm">{data.price_change_percentage_24h.toFixed(2)}%   </div>
-            <div className="text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-3 text-sm"><TrendingDownRoundedIcon></TrendingDownRoundedIcon></div>
+          <div className="flex gap-5 mt-8 ml-8">
+            <Tooltip title="Price change percentage in 24h">
+              <div className="text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-3xl text-sm h-fit pr-6 pl-6 pt-3 pb-3 font-semibold">{data.price_change_percentage_24h?.toFixed(2)}%   </div>
+            </Tooltip>
+            <div className="text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white hover:transition-all hover:duration-[0.3s] rounded-full p-2 text-sm h-fit"><TrendingDownRoundedIcon></TrendingDownRoundedIcon></div>
           </div>
-          <div className="text-red-500 font-semibold ml-8 mt-6"><span className="text-red-500 font-semibold">&#8377;</span>{" "}{data.current_price.toLocaleString('en-IN')}</div>
+          <Tooltip title="Current Price">
+            <div className="text-red-500 font-semibold ml-8 mt-6"><span className="text-red-500 font-semibold">&#8377;</span>{" "}{data.current_price.toLocaleString('en-IN')}</div>
+          </Tooltip>
         </>
         )}
 
