@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import GridDisplay from './GridDisplay'
 import ListDisplay from './ListDisplay'
-import "../Dashboard/Dashboard.css"
 import Search from './Search'
+import PaginationComponent from "../Dashboard/Pagination.jsx";
 
 const Dashboard = () => {
   const [data, setData] = useState([])
   const [error, setError] = useState(false)
   const [event, setEvent] = useState("Grid")
-
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [paginatedData, setPaginatedData] = useState([]);
 
   const onSearchChange = (e) => {
     setSearch(e.target.value)
@@ -26,6 +27,7 @@ const Dashboard = () => {
       .then((response) => {
         console.log(response)
         setData(response.data)
+        setPaginatedData(response.data.slice(0, 10));
       })
       .catch((error) => {
         console.log("error", error)
@@ -55,6 +57,13 @@ const Dashboard = () => {
     document.querySelector(".firstGrid").style.borderBottom = "none"
   }
 
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    // Value = new page number
+    let initialCount = (value - 1) * 10;
+    setPaginatedData(data.slice(initialCount, initialCount + 10));
+  };
+
 
   return (
     <>
@@ -72,13 +81,18 @@ const Dashboard = () => {
 
           <div>
             {event !== 'List' ? <div>
-              <GridDisplay data={searchData} />
+              <GridDisplay data={search ? searchData : paginatedData} />
             </div> :
               <div>
-                <ListDisplay data={searchData} />
+                <ListDisplay data={search ? searchData : paginatedData} />
               </div>}
           </div>
-
+          {!search && (
+            <PaginationComponent
+              page={page}
+              handlePageChange={handlePageChange}
+            />
+          )}
         </div>
       </div>
     </>
