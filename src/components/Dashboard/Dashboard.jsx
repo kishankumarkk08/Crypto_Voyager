@@ -3,12 +3,22 @@ import axios from 'axios'
 import GridDisplay from './GridDisplay'
 import ListDisplay from './ListDisplay'
 import "../Dashboard/Dashboard.css"
+import Search from './Search'
 
 const Dashboard = () => {
   const [data, setData] = useState([])
   const [error, setError] = useState(false)
   const [event, setEvent] = useState("Grid")
 
+  const [search, setSearch] = useState("");
+
+  const onSearchChange = (e) => {
+    setSearch(e.target.value)
+  }
+
+  let searchData = data.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+    || item.symbol.toLowerCase().includes(search.toLowerCase()))
 
   useEffect(() => {
     axios
@@ -50,9 +60,7 @@ const Dashboard = () => {
     <>
       <div className="bg-black h-screen w-full overflow-scroll absolute top-0">
         <div className="body overflow-scroll mt-32">
-          <div className="text-white">
-            Search
-          </div>
+          <Search search={search} onSearchChange={onSearchChange} />
           <div className="grid grid-cols-12 place-content-center place-items-center m-4 mb-8">
             <div className="col-span-6 hover:text-[#fca311] w-full flex justify-center items-center firstGrid cursor-pointer text-xl text-[#e5e5e5] border-b-2 border-[#fca311] p-2 mb-3" onClick={gridHandle}>
               Grid
@@ -64,10 +72,10 @@ const Dashboard = () => {
 
           <div>
             {event !== 'List' ? <div>
-              <GridDisplay data={data} />
+              <GridDisplay data={searchData} />
             </div> :
               <div>
-                <ListDisplay data={data} />
+                <ListDisplay data={searchData} />
               </div>}
           </div>
 
