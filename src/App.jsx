@@ -25,9 +25,6 @@ function App() {
 
   return (
     <>
-      {/* <div className="bg-black h-screen w-full">
-        <RouterProvider router={router} />
-      </div> */}
       <RouterProvider router={router} />
     </>
   )

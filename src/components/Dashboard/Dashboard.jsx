@@ -4,6 +4,8 @@ import GridDisplay from './GridDisplay'
 import ListDisplay from './ListDisplay'
 import Search from './Search'
 import PaginationComponent from "../Dashboard/Pagination.jsx";
+import Loader from '../Loader/Loader.jsx'
+import ScrollToTop from '../ScrollToTop/ScrollToTop.jsx'
 
 const Dashboard = () => {
   const [data, setData] = useState([])
@@ -12,6 +14,10 @@ const Dashboard = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [paginatedData, setPaginatedData] = useState([]);
+  const [loader, setLoader] = useState(true)
+
+  // const data = useLoaderData()
+  // paginatedData = useLoaderData()
 
   const onSearchChange = (e) => {
     setSearch(e.target.value)
@@ -21,29 +27,32 @@ const Dashboard = () => {
     item.name.toLowerCase().includes(search.toLowerCase())
     || item.symbol.toLowerCase().includes(search.toLowerCase()))
 
+  // useEffect(() => {
+  //   axios
+  //     .get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=250&sparkline=false&precision=2')
+  //     .then((response) => {
+  //       console.log(response)
+  //       setData(response.data)
+  //       setPaginatedData(response.data.slice(0, 10));
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error)
+  //     })
+  // }, [])
+
   useEffect(() => {
-    axios
-      .get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=100&sparkline=false&precision=2')
-      .then((response) => {
-        console.log(response)
+    ; (async () => {
+      try {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=250&sparkline=false&precision=2')
         setData(response.data)
         setPaginatedData(response.data.slice(0, 10));
-      })
-      .catch((error) => {
-        console.log("error", error)
-      })
+        setLoader(false)
+      } catch (error) {
+        console.log("Something went wrong")
+        setLoader(false)
+      }
+    })()
   }, [])
-
-  // useEffect(() => {
-  //   ; (async () => {
-  //     try {
-  //       const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&per_page=100&sparkline=false&precision=2')
-  //       setData(response.data)
-  //     } catch (error) {
-  //       console.log("Something went wrong")
-  //     }
-  //   })()
-  // }, [])
 
   const gridHandle = () => {
     setEvent("Grid")
@@ -79,20 +88,24 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div>
-            {event !== 'List' ? <div>
-              <GridDisplay data={search ? searchData : paginatedData} />
-            </div> :
+          {loader ? (<Loader />) :
+            (
               <div>
-                <ListDisplay data={search ? searchData : paginatedData} />
-              </div>}
-          </div>
+                {event !== 'List' ? <div>
+                  <GridDisplay data={search ? searchData : paginatedData} />
+                </div> :
+                  <div>
+                    <ListDisplay data={search ? searchData : paginatedData} />
+                  </div>}
+              </div>
+            )}
           {!search && (
             <PaginationComponent
               page={page}
               handlePageChange={handlePageChange}
             />
           )}
+
         </div>
       </div>
     </>
@@ -100,3 +113,10 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+// export const dashBoardLoader = async () => {
+//   const response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=250&sparkline=fals")
+//   return response.json()
+
+
+// }

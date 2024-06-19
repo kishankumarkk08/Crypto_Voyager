@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 
 export default function PaginationControlled({ page, handlePageChange }) {
   return (
-    <div className="flex m-3 items-center justify-center">
+    <div className="flex m-3 items-center justify-center mt-10 mb-10">
       <Pagination
         sx={{
           "& .MuiPaginationItem-text": {
@@ -22,7 +22,7 @@ export default function PaginationControlled({ page, handlePageChange }) {
             border: "none",
           },
         }}
-        count={10}
+        count={25}
         page={page}
         onChange={(event, value) => handlePageChange(event, value)}
       />

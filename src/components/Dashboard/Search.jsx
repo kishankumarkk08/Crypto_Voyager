@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 const Search = ({ search, onSearchChange }) => {
