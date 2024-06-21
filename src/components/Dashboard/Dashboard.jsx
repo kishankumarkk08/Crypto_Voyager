@@ -43,16 +43,22 @@ const Dashboard = () => {
   useEffect(() => {
     ; (async () => {
       try {
+        setError(false)
         const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=250&sparkline=false&precision=2')
         setData(response.data)
         setPaginatedData(response.data.slice(0, 10));
         setLoader(false)
       } catch (error) {
         console.log("Something went wrong")
+        setError(true)
         setLoader(false)
       }
     })()
   }, [])
+
+  if (error === true) {
+    return <h1 className="text-center flex justify-center items-center mt-32 text-[#14213d] text-2xl">Error 500: Internal Server Error!!</h1>
+  }
 
   const gridHandle = () => {
     setEvent("Grid")
@@ -113,10 +119,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-// export const dashBoardLoader = async () => {
-//   const response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=250&sparkline=fals")
-//   return response.json()
-
-
-// }

@@ -7,6 +7,7 @@ import About from './components/About/About'
 import News from './components/News/News'
 import Compare from './components/Compare/Compare'
 import Dashboard from './components/Dashboard/Dashboard'
+import CoinPage from './components/Pages/CoinPage/CoinPage'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path='/' element={<Layout />}>
         <Route path='' element={<Home />} />
         <Route path='dashboard' element={<Dashboard />} />
+        <Route path='coin/:id' element={<CoinPage />} />
         <Route path='news' element={<News />} />
         <Route path='compare' element={<Compare />} />
         <Route path='about' element={<About />} />
